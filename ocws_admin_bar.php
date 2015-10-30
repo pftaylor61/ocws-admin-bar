@@ -7,6 +7,8 @@ Version: 0.7
 Author: Paul Taylor
 Author URI: http://oldcastleweb.com/pws/about
 License: GPL2
+GitHub Plugin URI: https://github.com/pftaylor61/ocws-admin-bar
+GitHub Branch:     master
 */
 /*  Copyright 2012  Paul Taylor  (email : info@oldcastleweb.com)
 
