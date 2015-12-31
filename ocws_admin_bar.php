@@ -2,13 +2,11 @@
 /*
 Plugin Name: OCWS Admin Bar
 Plugin URI: http://oldcastleweb.com/pws/plugins
-Description: This plugin adds extra functionality to the admin bar, to enable special links to the <a href="http://www.oldcastleweb.com">Old Castle Web Solutions</a> site.
-Version: 0.7
+Description: This plugin adds extra functionality to the admin bar, to enable special links to the <a href="http://www.oldcastleweb.com">Old Castle Web Solutions</a> site. In version 0.6, the functionality replacing the 'Howdy' greeting has been removed, as this now forms part of another plugin.
+Version: 1.0
 Author: Paul Taylor
 Author URI: http://oldcastleweb.com/pws/about
 License: GPL2
-GitHub Plugin URI: https://github.com/pftaylor61/ocws-admin-bar
-GitHub Branch:     master
 */
 /*  Copyright 2012  Paul Taylor  (email : info@oldcastleweb.com)
 

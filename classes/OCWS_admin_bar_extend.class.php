@@ -11,6 +11,8 @@ if (!class_exists("OCWS_admin_bar_extend")) {
 				$ocwsabtitle .= " style=\"vertical-align:middle;margin-right:5px\" width=\"16\" height=\"16\" alt=\"OCWS\" />";
 				$ocwsabtitle .= "Old Castle Web Solutions";
 				global $wp_admin_bar;
+				
+				// make a new menu for 'Old Castle Web Services'
 				$wp_admin_bar->add_menu(array(
 				'id' => 'wp-admin-bar-new-item',
 				'title' => __($ocwsabtitle),
@@ -36,7 +38,31 @@ if (!class_exists("OCWS_admin_bar_extend")) {
 				));
 				}
 				add_action('wp_before_admin_bar_render', 'wp_admin_bar_new_item');
-
+				
+				function ocws_abm() {
+					global $wp_admin_bar;
+					$ocws_pl_url = site_url('/wp-admin/plugins.php');
+					$ocws_id = 'site-name';
+					$ocws_plug_url = str_replace( '/classes', '', plugins_url( plugin_basename( dirname( __FILE__ ) ) ) );
+					$ocws_abtitle = "<img src=\"".$ocws_plug_url."/images/castlelogo16x16.png\"";
+					$ocws_abtitle .= " style=\"vertical-align:middle;margin-right:5px\" width=\"16\" height=\"16\" alt=\"OCWS\" />";
+					
+					// add 'plugins' to the Site Name menu
+					if ( !is_admin() ) {
+					$wp_admin_bar->add_menu(array(
+						'parent' => $ocws_id,
+						'title' => 'Plugins',
+						'href' => $ocws_pl_url,
+						));
+					}
+					// change the logo at the top left
+					$wp_admin_bar->add_menu( array(
+						'id'    => 'wp-logo',
+						'title' => $ocws_abtitle.'<span class="screen-reader-text">'. __( 'About WordPress' ) . '</span>',
+						'href'  => self_admin_url( 'about.php' ),
+					) );
+				}
+				add_action('admin_bar_menu', 'ocws_abm', 2000);
 
 		}
 	}
