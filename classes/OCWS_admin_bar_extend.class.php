@@ -42,6 +42,7 @@ if (!class_exists("OCWS_admin_bar_extend")) {
 				function ocws_abm() {
 					global $wp_admin_bar;
 					$ocws_pl_url = site_url('/wp-admin/plugins.php');
+					$ocws_usr_url = site_url('/wp-admin/users.php');
 					$ocws_id = 'site-name';
 					$ocws_plug_url = str_replace( '/classes', '', plugins_url( plugin_basename( dirname( __FILE__ ) ) ) );
 					$ocws_abtitle = "<img src=\"".$ocws_plug_url."/images/castlelogo16x16.png\"";
@@ -53,6 +54,11 @@ if (!class_exists("OCWS_admin_bar_extend")) {
 						'parent' => $ocws_id,
 						'title' => 'Plugins',
 						'href' => $ocws_pl_url,
+						));
+					$wp_admin_bar->add_menu(array(
+						'parent' => $ocws_id,
+						'title' => 'Users',
+						'href' => $ocws_usr_url,
 						));
 					}
 					// change the logo at the top left
