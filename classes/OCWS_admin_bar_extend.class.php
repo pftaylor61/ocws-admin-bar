@@ -42,12 +42,21 @@ if (!class_exists("OCWS_admin_bar_extend")) {
 				
 				function ocws_abm() {
 					global $wp_admin_bar;
-					$ocws_pl_url = site_url('/wp-admin/plugins.php');
-					$ocws_usr_url = site_url('/wp-admin/users.php');
-                                        $ocws_orders_url = site_url('/wp-admin/edit.php?post_type=shop_order');
-                                        $ocws_prods_url = site_url('/wp-admin/edit.php?post_type=product');
-                                        $ocws_ccache_url = site_url('/wp-admin/edit.php?post_type=creationcache');
+                                        $ocws_murl = array(
+                                            'plugins' => site_url('/wp-admin/plugins.php'),
+                                            'users' => site_url('/wp-admin/users.php'),
+                                            'orders' => site_url('/wp-admin/edit.php?post_type=shop_order'),
+                                            'products' => site_url('/wp-admin/edit.php?post_type=product'),
+                                            'caches' => site_url('/wp-admin/edit.php?post_type=creationcache'),
+                                            'sliders' => site_url('/wp-admin/edit.php?post_type=ocwssl_images'),
+                                            'newsbox' => site_url('/wp-admin/edit.php?post_type=ocwsnb_newsbox'),
+                                            );
+					
 					$ocws_id = 'site-name';
+                                        $ocws_side = 'ocws_anchor';
+                                        $ocws_theme = wp_get_theme();
+                                        //$ocws_side_label = 'This Menu';
+                                        $ocws_side_label = $ocws_theme->get( 'Name' ).' Theme Menu';
 					$ocws_plug_url = str_replace( '/classes', '', plugins_url( plugin_basename( dirname( __FILE__ ) ) ) );
 					$ocws_abtitle = "<img src=\"".$ocws_plug_url."/images/castlelogo16x16.png\"";
 					$ocws_abtitle .= " style=\"vertical-align:middle;margin-right:5px\" width=\"16\" height=\"16\" alt=\"OCWS\" />";
@@ -55,37 +64,60 @@ if (!class_exists("OCWS_admin_bar_extend")) {
 					// add 'plugins' to the Site Name menu
 					if ( !is_admin() ) {
                                             $wp_admin_bar->add_menu(array(
+                                                    'id' => $ocws_side,
                                                     'parent' => $ocws_id,
-                                                    'title' => 'Plugins',
-                                                    'href' => $ocws_pl_url,
+                                                    'title' => $ocws_side_label,
                                                     ));
                                             $wp_admin_bar->add_menu(array(
-                                                    'parent' => $ocws_id,
+                                                    'parent' => $ocws_side,
+                                                    'title' => 'Plugins',
+                                                    'href' => $ocws_murl['plugins'],
+                                                    ));
+                                            $wp_admin_bar->add_menu(array(
+                                                    'parent' => $ocws_side,
                                                     'title' => 'Users',
-                                                    'href' => $ocws_usr_url,
+                                                    'href' => $ocws_murl['users'],
                                                     ));
                                             if ( is_plugin_active('woocommerce/woocommerce.php') ) {
                                                 // testing for Woocommerce
                                                 $wp_admin_bar->add_menu(array(
-                                                    'parent' => $ocws_id,
+                                                    'parent' => $ocws_side,
                                                     'title' => 'Orders',
-                                                    'href' => $ocws_orders_url,
+                                                    'href' => $ocws_murl['orders'],
                                                     ));
                                                 $wp_admin_bar->add_menu(array(
-                                                    'parent' => $ocws_id,
+                                                    'parent' => $ocws_side,
                                                     'title' => 'Products',
-                                                    'href' => $ocws_prods_url,
+                                                    'href' => $ocws_murl['products'],
                                                     ));
                                             }
                                             if ( is_plugin_active('ocws-creationcache/ocws-creationcache.php') ) {
                                                 // testing for Creation Cache
                                                 $wp_admin_bar->add_menu(array(
-                                                    'parent' => $ocws_id,
+                                                    'parent' => $ocws_side,
                                                     'title' => 'Creation Caches',
-                                                    'href' => $ocws_ccache_url,
+                                                    'href' => $ocws_murl['caches'],
                                                     ));
                                                 
-                                            } 
+                                            }
+                                            if ( is_plugin_active('ocws-slider/ocws-slider.php') ) {
+                                                // testing for Creation Cache
+                                                $wp_admin_bar->add_menu(array(
+                                                    'parent' => $ocws_side,
+                                                    'title' => 'Image Sliders',
+                                                    'href' => $ocws_murl['sliders'],
+                                                    ));
+                                                
+                                            }
+                                            if ( is_plugin_active('ocws-newsbox/ocws-newsbox.php') ) {
+                                                // testing for Creation Cache
+                                                $wp_admin_bar->add_menu(array(
+                                                    'parent' => $ocws_side,
+                                                    'title' => 'Newsboxes',
+                                                    'href' => $ocws_murl['newsbox'],
+                                                    ));
+                                                
+                                            }
                                         
 					} // end adding to Site Name menu
                                         
