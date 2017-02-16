@@ -4,6 +4,12 @@ if (!class_exists("OCWS_admin_bar_extend")) {
 	class OCWS_admin_bar_extend{
 		
 		function OCWS_admin_bar_extend(){//constructor
+                        add_action( 'wp_enqueue_scripts', 'load_dashicons_front_end' );
+                        function load_dashicons_front_end() {
+                            wp_enqueue_style( 'dashicons' );
+                        }
+                    
+                    
 			function wp_admin_bar_new_item() {
 				global $plugin_url;
 				global $ocwsabtitle;
@@ -14,6 +20,8 @@ if (!class_exists("OCWS_admin_bar_extend")) {
 				global $wp_admin_bar;
 				
 				// make a new menu for 'Old Castle Web Services'
+                                
+                            if ( is_admin() ) { // make sure menu appears only in admin
 				$wp_admin_bar->add_menu(array(
 				'id' => 'wp-admin-bar-new-item',
 				'title' => __($ocwsabtitle),
@@ -37,7 +45,8 @@ if (!class_exists("OCWS_admin_bar_extend")) {
 				'title' => __('OCWS Themes'),
 				'href' => 'http://www.oldcastleweb.com/pws/themes/'
 				));
-				}
+                            } // end if is_admin section
+			} // end function wp_admin_bar_new_item
 				add_action('wp_before_admin_bar_render', 'wp_admin_bar_new_item');
 				
 				function ocws_abm() {
@@ -54,15 +63,44 @@ if (!class_exists("OCWS_admin_bar_extend")) {
 					
 					$ocws_id = 'site-name';
                                         $ocws_side = 'ocws_anchor';
+                                        
                                         $ocws_theme = wp_get_theme();
                                         //$ocws_side_label = 'This Menu';
-                                        $ocws_side_label = $ocws_theme->get( 'Name' ).' Theme Menu';
+                                        
 					$ocws_plug_url = str_replace( '/classes', '', plugins_url( plugin_basename( dirname( __FILE__ ) ) ) );
 					$ocws_abtitle = "<img src=\"".$ocws_plug_url."/images/castlelogo16x16.png\"";
 					$ocws_abtitle .= " style=\"vertical-align:middle;margin-right:5px\" width=\"16\" height=\"16\" alt=\"OCWS\" />";
+                                        $ocws_side_abtitle = $ocws_abtitle."Old Castle Web Solutions";
+                                        $ocws_side_label = "<img src=\"".$ocws_plug_url."/images/dewisant_icon_16x16.png\" style=\"vertical-align:middle;margin-right:5px\" width=\"16\" height=\"16\" alt=\"OCWS\" />".$ocws_theme->get( 'Name' ).' Theme Menu';
 					
 					// add 'plugins' to the Site Name menu
 					if ( !is_admin() ) {
+                                            
+                                            $wp_admin_bar->add_menu(array(
+                                                'id' => 'ocws_ocws',
+                                                'title' => __($ocws_side_abtitle),
+                                                'parent' => $ocws_id,
+                                                'href' => 'http://www.oldcastleweb.com/'
+                                                ));
+                                            
+                                            $wp_admin_bar->add_menu(array(
+                                                'parent' => 'ocws_ocws',
+                                                'title' => __('OCWS Web Packages'),
+                                                'href' => 'http://www.oldcastleweb.com/pws/website-packages/'
+                                                ));
+
+                                            $wp_admin_bar->add_menu(array(
+                                                'parent' => 'ocws_ocws',
+                                                'title' => __('OCWS Plugins'),
+                                                'href' => 'http://www.oldcastleweb.com/pws/plugins/'
+                                                ));
+
+                                            $wp_admin_bar->add_menu(array(
+                                                'parent' => 'ocws_ocws',
+                                                'title' => __('OCWS Themes'),
+                                                'href' => 'http://www.oldcastleweb.com/pws/themes/'
+                                                ));
+                                            
                                             $wp_admin_bar->add_menu(array(
                                                     'id' => $ocws_side,
                                                     'parent' => $ocws_id,
