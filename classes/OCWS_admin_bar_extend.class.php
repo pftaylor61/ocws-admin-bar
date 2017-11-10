@@ -59,6 +59,7 @@ if (!class_exists("OCWS_admin_bar_extend")) {
                                             'caches' => site_url('/wp-admin/edit.php?post_type=creationcache'),
                                             'sliders' => site_url('/wp-admin/edit.php?post_type=ocwssl_images'),
                                             'newsbox' => site_url('/wp-admin/edit.php?post_type=ocwsnb_newsbox'),
+											'posts' => site_url('/wp-admin/edit.php'),
                                             );
 					
 					$ocws_id = 'site-name';
@@ -115,6 +116,11 @@ if (!class_exists("OCWS_admin_bar_extend")) {
                                                     'parent' => $ocws_side,
                                                     'title' => 'Users',
                                                     'href' => $ocws_murl['users'],
+                                                    ));
+                                            $wp_admin_bar->add_menu(array(
+                                                    'parent' => $ocws_side,
+                                                    'title' => 'Posts',
+                                                    'href' => $ocws_murl['posts'],
                                                     ));
                                             if ( is_plugin_active('woocommerce/woocommerce.php') ) {
                                                 // testing for Woocommerce
