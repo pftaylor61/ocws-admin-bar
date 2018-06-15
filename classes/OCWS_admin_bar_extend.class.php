@@ -45,20 +45,16 @@ if (!class_exists("OCWS_admin_bar_extend")) {
 				'title' => __('OCWS Themes'),
 				'href' => 'http://www.oldcastleweb.com/pws/themes/'
 				));
-				
-				if ( is_plugin_active('updraftplus/updraftplus.php') ) { // testing for Updraft Plus plugin
-					$ocwsab_currentuser = wp_get_current_user();
-					if ($ocwsab_currentuser->user_login == 'pftaylor61') { // test to see if pftaylor61 is current user
-                       $wp_admin_bar->add_menu(array(
-                       'parent' => 'wp-admin-bar-new-item',
-                       'title' => 'Backup Dashboard',
-                       'href' => 'http://oldcastleweb.com/pws/backup-dashboard/',
-                       ));
-                    } // end testing to see if pftaylor61 is current user
-                                                
-                } // end testing to see if Updraft Plus plugin exists
-				
-				
+                                
+                                if ( is_plugin_active('updraftplus/updraftplus.php') ) {
+                                    $wp_admin_bar->add_menu(array(
+                                    'parent' => 'wp-admin-bar-new-item',
+                                    'title' => __('Backup Dashboard'),
+                                    'href' => 'http://oldcastleweb.com/pws/backup-dashboard/'
+                                    ));
+                                }
+                                
+                                
                             } // end if is_admin section
 			} // end function wp_admin_bar_new_item
 				add_action('wp_before_admin_bar_render', 'wp_admin_bar_new_item');
@@ -176,7 +172,6 @@ if (!class_exists("OCWS_admin_bar_extend")) {
                                                     ));
                                                 
                                             }
-
                                         
 					} // end adding to Site Name menu
                                         
