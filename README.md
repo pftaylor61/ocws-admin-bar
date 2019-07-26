@@ -5,8 +5,11 @@ ocws-admin-bar
 
 This plugin inserts a menu on the Admin Bar, which provides links to the Old Castle Web Services website. This is for the convenience of clients of OCWS, and is placed here, in the Github repositories, to enable easy updating of the plugin, using Github Updater.
 
+## Version 1.9
+Link added to front end for Timely Calendar Events
+
 ## Version 1.8
-Now adds support for the Updraft plugin, directing to our Backup Dashboard.
+Conditional Link added for Backup Dashboard, if the Updraft is in place. This only works if the web developer is logged in
 
 ## Version 1.7
 Link added to front end for posts

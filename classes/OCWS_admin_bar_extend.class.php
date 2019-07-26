@@ -45,16 +45,20 @@ if (!class_exists("OCWS_admin_bar_extend")) {
 				'title' => __('OCWS Themes'),
 				'href' => 'http://www.oldcastleweb.com/pws/themes/'
 				));
-                                
-                                if ( is_plugin_active('updraftplus/updraftplus.php') ) {
-                                    $wp_admin_bar->add_menu(array(
-                                    'parent' => 'wp-admin-bar-new-item',
-                                    'title' => __('Backup Dashboard'),
-                                    'href' => 'http://oldcastleweb.com/pws/backup-dashboard/'
-                                    ));
-                                }
-                                
-                                
+				
+				if ( is_plugin_active('updraftplus/updraftplus.php') ) { // testing for Updraft Plus plugin
+					$ocwsab_currentuser = wp_get_current_user();
+					if ($ocwsab_currentuser->user_login == 'pftaylor61') { // test to see if pftaylor61 is current user
+                       $wp_admin_bar->add_menu(array(
+                       'parent' => 'wp-admin-bar-new-item',
+                       'title' => 'Backup Dashboard',
+                       'href' => 'http://oldcastleweb.com/pws/backup-dashboard/',
+                       ));
+                    } // end testing to see if pftaylor61 is current user
+                                                
+                } // end testing to see if Updraft Plus plugin exists
+				
+				
                             } // end if is_admin section
 			} // end function wp_admin_bar_new_item
 				add_action('wp_before_admin_bar_render', 'wp_admin_bar_new_item');
@@ -70,6 +74,7 @@ if (!class_exists("OCWS_admin_bar_extend")) {
                                             'sliders' => site_url('/wp-admin/edit.php?post_type=ocwssl_images'),
                                             'newsbox' => site_url('/wp-admin/edit.php?post_type=ocwsnb_newsbox'),
 											'posts' => site_url('/wp-admin/edit.php'),
+											'event' => site_url('wp-admin/edit.php?post_type=ai1ec_event'),
                                             );
 					
 					$ocws_id = 'site-name';
@@ -172,6 +177,16 @@ if (!class_exists("OCWS_admin_bar_extend")) {
                                                     ));
                                                 
                                             }
+											if ( is_plugin_active('all-in-one-event-calendar/all-in-one-event-calendar.php') ) {
+                                                // testing for All In One Calendar Events
+                                                $wp_admin_bar->add_menu(array(
+                                                    'parent' => $ocws_side,
+                                                    'title' => 'Events',
+                                                    'href' => $ocws_murl['event'],
+                                                    ));
+                                                
+                                            }
+
                                         
 					} // end adding to Site Name menu
                                         
