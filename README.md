@@ -5,6 +5,9 @@ ocws-admin-bar
 
 This plugin inserts a menu on the Admin Bar, which provides links to the Old Castle Web Services website. This is for the convenience of clients of OCWS, and is placed here, in the Github repositories, to enable easy updating of the plugin, using Github Updater.
 
+## Version 1.10
+Link added to front end for Pages and for Classic Commerce elements
+
 ## Version 1.9
 Link added to front end for Timely Calendar Events
 
